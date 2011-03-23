@@ -24,11 +24,20 @@ public final class CPF implements Serializable {
 	}
 
 	private void cleanNonDigitsAndStoreIt(String cpf) {
-		this.cpf = cpf.replaceAll("\\D", "").trim();
+		try {
+			this.cpf = cpf.replaceAll("\\D", "");
+		} catch (NullPointerException npe) {
+			throw new InvalidCPFException(cpf);
+		}
 	}
 
 	private void validateCheckDigits() {
-		long cpf = Long.parseLong(this.cpf);
+		long cpf = 0l;
+		try {
+			cpf = Long.parseLong(this.cpf);
+		} catch (NumberFormatException nfe) {
+			throw new InvalidCPFException(this.cpf);
+		}
 		long dv = cpf % 100;
 		cpf /= 10;
 		int d2 = 0;

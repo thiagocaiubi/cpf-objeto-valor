@@ -27,17 +27,17 @@ public class CPFTest {
 		new CPF("12312312380");
 	}
 	
-	@Test(expected=NumberFormatException.class)
+	@Test(expected=InvalidCPFException.class)
 	public void testInvalidCPFNonDigits() {
 		new CPF("cpf");
 	}
 	
-	@Test(expected=NumberFormatException.class)
+	@Test(expected=InvalidCPFException.class)
 	public void testInvalidCPFEmpty() {
 		new CPF("");
 	}
 	
-	@Test(expected=NullPointerException.class)
+	@Test(expected=InvalidCPFException.class)
 	public void testInvalidCPFNull() {
 		new CPF(null);
 	}
